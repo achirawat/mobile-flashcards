@@ -1,4 +1,4 @@
-export default Data = {
+export default dummyData  = {
   React: {
     title: 'React',
     questions: [
