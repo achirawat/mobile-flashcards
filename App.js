@@ -3,7 +3,7 @@ import { View, StatusBar, Platform } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { Constants } from 'expo'
-import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
+import { createAppContainer, createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import reducer from './reducers'
 import { setLocalNotification } from './utils/helpers'
 import { white, purple } from './utils/color';
@@ -89,6 +89,8 @@ const MainNavigator = createStackNavigator({
   // },
 })
 
+const AppContainer = createAppContainer(MainNavigator)
+
 export default class App extends React.Component {
   componentDidMount () {
     setLocalNotification()
@@ -100,7 +102,7 @@ export default class App extends React.Component {
           <View style={{backgroundColor: "#1051b1", height: Constants.statusBarHeight}}>
             <StatusBar translucent backgroundColor={"#1051b1"} barStyle='light-content' />
           </View>
-          <MainNavigator />
+          <AppContainer />
         </View>
       </Provider>
     );
