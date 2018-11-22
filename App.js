@@ -2,9 +2,14 @@ import React from 'react'
 import { View, StatusBar, Platform } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { Constants } from 'expo'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import reducer from './reducers'
 import { setLocalNotification } from './utils/helpers'
+import { white, purple } from './utils/color';
+import DeckList from './components/DeckList'
+import Deck from './components/Deck'
+import AddDeck from './components/AddDeck'
 
 const route = {
   Decks: {
@@ -41,22 +46,47 @@ const tabNavigation = {
   }
 }
 
-const Tabs = Platform.OS === 'ios' ? 
-  createBottomTabNavigator(route, tabNavigation) : createMaterialTopTabNavigator(route, tabNavigation)
+// const Tabs = Platform.OS === 'ios' ? 
+//   createBottomTabNavigator(route, tabNavigation) : createMaterialTopTabNavigator(route, tabNavigation)
+const Tabs = createMaterialTopTabNavigator(route, tabNavigation)
 
 const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
-  },
-  EntryDetail: { 
-    screen: EntryDetail,
     navigationOptions: {
-      headerTintColor: white,
+      header: null,
+    }
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: "white",
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: "#1051b1",
+        height: 40,
       }
     }
-  }  
+  },
+  // AddCard: {
+  //   screen: AddCard,
+  //   navigationOptions: {
+  //     headerTintColor: "white",
+  //     headerStyle: {
+  //       backgroundColor: "#1051b1",
+  //       height: 40,
+  //     }
+  //   }
+  // },
+  // Quiz: {
+  //   screen: Quiz,
+  //   navigationOptions: {
+  //     headerTintColor: "white",
+  //     headerStyle: {
+  //       backgroundColor: "#1051b1",
+  //       height: 40,
+  //     }
+  //   }
+  // },
 })
 
 export default class App extends React.Component {
