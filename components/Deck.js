@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (deckList) {
-  const title = {}
   return {
     deckList
   }

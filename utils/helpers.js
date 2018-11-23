@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 
-const NOTIFICATION_KEY = 'UdaciFitness:notifications'
+const NOTIFICATION_KEY = 'Notifications'
 
 export function clearLocationNotification () {
   return AsyncStorage.removeItem(NOTIFICATION_KEY).then(Notifications.cancelAllScheduledNotificationsAsync)

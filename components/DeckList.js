@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import Deck from './Deck'
 import { getDecks } from '../utils/api'
 import DeckListItem from './DeckListItem'
 import { connect } from 'react-redux'
-import { receiveDecks } from '../actions'
+import { receiveDeck } from '../actions'
 
 class DeckList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    getDecks().then((deckList) => dispatch(receiveDecks(deckList)))
+    getDecks().then((deckList) => dispatch(receiveDeck(deckList)))
   }
 
   render() {
     const { deckList } = this.props
+    
     return (
       <ScrollView style={styles.container}>
         {Object.keys(deckList).map((deck) => (

@@ -1,4 +1,8 @@
-export default dummyData  = {
+import { AsyncStorage } from 'react-native'
+
+export const STORAGE_KEY = 'DeckList'
+
+const dummyData  = {
   React: {
     title: 'React',
     questions: [
@@ -21,4 +25,16 @@ export default dummyData  = {
       }
     ]
   }
+}
+
+function setDummyData () {
+  // store dummy data
+  AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(dummyData))
+  return dummyData
+}
+
+export function formatData (decks) {
+  return decks === null
+    ? setDummyData()
+    : JSON.parse(results)
 }

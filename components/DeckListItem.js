@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 
 class DeckListItem extends Component {
 
   render() {
     const { deck } = this.props
-    let countCards = 0
+    let numOfCards = 0
     deck.questions === []
-      ? countCards = '0 cards'
-      : countCards = deck.questions.length + ' cards'
+      ? numOfCards = '0 cards'
+      : numOfCards = deck.questions.length + ' cards'
 
     return (
       <View style={styles.container}>
         <Text style={{fontSize: 40}}>{deck.title}</Text>
-        <Text style={{fontSize: 20}}>{countCards}</Text>
+        <Text style={{fontSize: 20}}>{numOfCards}</Text>
       </View>
     )
   }

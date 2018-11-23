@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 import { addDeck } from '../actions';
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
   state = {
     title: ''
   }
@@ -16,9 +17,13 @@ export default class AddDeck extends Component {
   }
   onSubmit = () => {
     const { title } = this.state
-    const { dispatch } = this.props
 
-    dispatch(addDeck({ title }))
+    const titleObj = {}
+    titleObj[title] = {title: title, questions: []}
+
+    saveTitle(titleObj)
+
+    this.props.dispatch(addDeck(title))
 
     this.setState({ title: '' })
 
@@ -70,3 +75,11 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 })
+
+function mapStateToProps (deckList) {
+  return {
+    deckList
+  }
+}
+
+export default connect(mapStateToProps)(AddDeck)
