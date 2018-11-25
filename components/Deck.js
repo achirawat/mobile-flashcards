@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { getDeck } from '../utils/api'
 import { connect } from 'react-redux'
 
 class Deck extends Component {
-
   render() {
-    const title = this.props.navigation.state.params.deck.title
-    let questions = this.props.navigation.state.params.deck.questions
+    const { title, question } = this.props.navigation.state.params.deck
+    const { deckId, navigation } = this.props
 
     if(this.props.deckList[title].questions !== []){
       questions = this.props.deckList[title].questions
     }
 
-    let numOfCards = 0
+    let  numOfCards = 0
     questions === []
       ? numOfCards = '0 cards'
       : numOfCards = questions.length + ' cards'

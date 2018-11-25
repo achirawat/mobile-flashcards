@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { addDeck } from '../actions';
+import { saveTitle, getDecks  } from '../utils/api'
+import { addDeck, receiveDecks  } from '../actions';
 
 class AddDeck extends Component {
   state = {
@@ -17,15 +18,16 @@ class AddDeck extends Component {
   }
   onSubmit = () => {
     const { title } = this.state
+    const { dispatch, deckList } = this.props
 
-    const titleObj = {}
-    titleObj[title] = {title: title, questions: []}
+    const titleDeck = {}
+    titleDeck[title] = {title: title, questions: []}
 
-    saveTitle(titleObj)
+    saveTitle(titleDeck)
 
-    this.props.dispatch(addDeck(title))
+    this.setState({ title: ''})
 
-    this.setState({ title: '' })
+    dispatch(addDeck(title))
 
     this.props.navigation.navigate('Deck', {deck: {title: title, questions: []}})
   }
@@ -34,7 +36,7 @@ class AddDeck extends Component {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 30}}>New Deck</Text>
-        <TextInput style={styles.input} placeholder="Title of New Deck" onChange={(title) => this.setState({ title })} value={title}/>
+        <TextInput style={styles.input} placeholder="Title of New Deck" onChangeText={(title) => this.setState({ title })} value={title}/>
         <TouchableOpacity style={styles.submitBtn} disabled={this.isDisabled()} onPress={this.onSubmit}>
           <Text style={styles.btnText}>Submit</Text>
         </TouchableOpacity>

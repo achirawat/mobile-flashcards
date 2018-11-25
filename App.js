@@ -6,10 +6,12 @@ import { Constants } from 'expo'
 import { createAppContainer, createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import reducer from './reducers'
 import { setLocalNotification } from './utils/helpers'
-import { white, purple } from './utils/color';
+import { white, blue } from './utils/color';
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 
 const route = {
   Decks: {
@@ -34,7 +36,7 @@ const tabNavigation = {
     activeTintColor: white,
     style: {
       height: 56,
-      backgroundColor: purple,
+      backgroundColor: blue,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -46,9 +48,7 @@ const tabNavigation = {
   }
 }
 
-// const Tabs = Platform.OS === 'ios' ? 
-//   createBottomTabNavigator(route, tabNavigation) : createMaterialTopTabNavigator(route, tabNavigation)
-const Tabs = createMaterialTopTabNavigator(route, tabNavigation)
+const Tabs = Platform.OS === 'ios' ? createBottomTabNavigator(route, tabNavigation) : createMaterialTopTabNavigator(route, tabNavigation)
 
 const MainNavigator = createStackNavigator({
   Home: {
@@ -62,31 +62,31 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: "#1051b1",
+        backgroundColor: "#0500ff",
         height: 40,
       }
     }
   },
-  // AddCard: {
-  //   screen: AddCard,
-  //   navigationOptions: {
-  //     headerTintColor: "white",
-  //     headerStyle: {
-  //       backgroundColor: "#1051b1",
-  //       height: 40,
-  //     }
-  //   }
-  // },
-  // Quiz: {
-  //   screen: Quiz,
-  //   navigationOptions: {
-  //     headerTintColor: "white",
-  //     headerStyle: {
-  //       backgroundColor: "#1051b1",
-  //       height: 40,
-  //     }
-  //   }
-  // },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#0500ff",
+        height: 40,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#0500ff",
+        height: 40,
+      }
+    }
+  },
 })
 
 const AppContainer = createAppContainer(MainNavigator)
@@ -99,8 +99,8 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <View style={{backgroundColor: "#1051b1", height: Constants.statusBarHeight}}>
-            <StatusBar translucent backgroundColor={"#1051b1"} barStyle='light-content' />
+          <View style={{backgroundColor: "#0500ff", height: Constants.statusBarHeight}}>
+            <StatusBar translucent backgroundColor={"#0500ff"} barStyle='light-content' />
           </View>
           <AppContainer />
         </View>
